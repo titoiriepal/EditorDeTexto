@@ -9,6 +9,8 @@ using System.Drawing;
 public partial class Form1 : Form
 {
     private Label etSaludo;
+    private Button btSaludo;
+    private ToolTip ttToolTip1;
     public Form1()
     {
         Iniciarcomponentes();
@@ -28,6 +30,15 @@ public partial class Form1 : Form
         etSaludo.Size = new Size(358, 40);
         etSaludo.TabIndex = 1;
         Controls.Add(etSaludo);
+        btSaludo = new Button();
+        btSaludo.Name = "btSaludo";
+        btSaludo.Text = "Haga &clic aquí";
+        btSaludo.Location = new Point(78, 176);
+        btSaludo.Size = new Size(353, 36);
+        btSaludo.TabIndex = 0;
+        Controls.Add(btSaludo);
+        ttToolTip1 = new ToolTip();
+        ttToolTip1.SetToolTip(btSaludo, "Botón de pulsación");
     }
     protected override void Dispose(bool eliminar)
     {
