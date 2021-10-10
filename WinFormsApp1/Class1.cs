@@ -11,6 +11,8 @@ public partial class Form1 : Form
     private Label etSaludo;
     private Button btSaludo;
     private ToolTip ttToolTip1;
+    private delegate void SetColorDelegate(Color C);
+
     public Form1()
     {
         Iniciarcomponentes();
@@ -18,9 +20,12 @@ public partial class Form1 : Form
 
     public void Iniciarcomponentes()
     {
+        // Iniciar el formulario de la clase Form
         ClientSize = new Size(505, 285);
         Name = "Form1";
         Text = "Saludo";
+
+        // Iniciar una etiqueta
         etSaludo = new Label();
         etSaludo.Name = "etSaludo";
         etSaludo.Text = "etiqueta";
@@ -30,6 +35,8 @@ public partial class Form1 : Form
         etSaludo.Size = new Size(358, 40);
         etSaludo.TabIndex = 1;
         Controls.Add(etSaludo);
+
+        //Iniciar un botón con su Tooltip
         btSaludo = new Button();
         btSaludo.Name = "btSaludo";
         btSaludo.Text = "Haga &clic aquí";
@@ -39,6 +46,7 @@ public partial class Form1 : Form
         Controls.Add(btSaludo);
         ttToolTip1 = new ToolTip();
         ttToolTip1.SetToolTip(btSaludo, "Botón de pulsación");
+        btSaludo.Click += new EventHandler(BtSaludo_Click);
     }
     protected override void Dispose(bool eliminar)
     {
@@ -52,6 +60,18 @@ public partial class Form1 : Form
     public static void Main()
     {
         Application.Run(new Form1());
+    }
+
+    private void BtSaludo_Click(object sender, EventArgs e)
+    {
+        etSaludo.Text = "¡¡¡Hola Mundo!!!";
+        SetColorDelegate delegadoColor = new SetColorDelegate(SetColor_etSaludo);
+        delegadoColor(Color.Red);
+    }
+
+    private void SetColor_etSaludo(Color color)
+    {
+        etSaludo.ForeColor = color;
     }
 
 }
