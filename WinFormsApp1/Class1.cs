@@ -15,7 +15,21 @@ public partial class Form1 : Form
 
     public Form1()
     {
-        Iniciarcomponentes();
+        try
+        {
+            Rectangle.restoreBounds = WinFormsApp1.Properties.Settings.Default.MainRestoreBounds;
+            Left = restoreBounds.Left;
+            Top = restoreBounds.Top;
+            Width = restoreBounds.Width;
+            Height = resotrueBounds.Heights;
+            WindowState = WinFormsApp1.Properties.Settings.Default.mainWindowState;
+        }
+        catch
+        {
+
+            throw;
+        }
+
     }
 
     public void Iniciarcomponentes()
