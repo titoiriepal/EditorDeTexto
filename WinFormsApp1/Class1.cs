@@ -79,7 +79,17 @@ public partial class Form1 : Form
 
     public static void Main()
     {
-        Application.Run(new Form1());
+        if (PrimeraInstancia)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
+        else
+        {
+            MessageBox.Show("La aplicación ya se está ejecutando");
+            Application.Exit();
+        }
     }
     
 
@@ -93,6 +103,18 @@ public partial class Form1 : Form
     private void SetColor_etSaludo(Color color)
     {
         etSaludo.ForeColor = color;
+    }
+
+    private static bool PrimeraInstancia
+    {
+        get
+        {
+            System.Threading.Mutex exmut;
+            string nombre_exmut = "WinFormsApp1";
+            bool nueva;
+            exmut = new System.Threading.Mutex(true, nombre_exmut, out nueva);
+            return nueva;
+        }
     }
 
 }
