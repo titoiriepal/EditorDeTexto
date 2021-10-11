@@ -15,19 +15,19 @@ public partial class Form1 : Form
 
     public Form1()
     {
+        Iniciarcomponentes();
         try
         {
-            Rectangle.restoreBounds = WinFormsApp1.Properties.Settings.Default.MainRestoreBounds;
+            Rectangle restoreBounds = WinFormsApp1.Properties.Settings.Default.MainRestoreBounds;
             Left = restoreBounds.Left;
             Top = restoreBounds.Top;
             Width = restoreBounds.Width;
-            Height = resotrueBounds.Heights;
-            WindowState = WinFormsApp1.Properties.Settings.Default.mainWindowState;
+            Height = restoreBounds.Height;
+            WindowState = WinFormsApp1.Properties.Settings.Default.MainWindowState;
         }
         catch
         {
 
-            throw;
         }
 
     }
@@ -64,6 +64,12 @@ public partial class Form1 : Form
     }
     protected override void Dispose(bool eliminar)
     {
+        if (this.WindowState == FormWindowState.Normal)
+            WinFormsApp1.Properties.Settings.Default.MainRestoreBounds = this.DesktopBounds;
+        else
+            WinFormsApp1.Properties.Settings.Default.MainRestoreBounds = RestoreBounds;
+        WinFormsApp1.Properties.Settings.Default.MainWindowState = WindowState;
+        WinFormsApp1.Properties.Settings.Default.Save();
         if (eliminar)
         {
 
@@ -75,6 +81,7 @@ public partial class Form1 : Form
     {
         Application.Run(new Form1());
     }
+    
 
     private void BtSaludo_Click(object sender, EventArgs e)
     {
